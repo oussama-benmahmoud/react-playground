@@ -1,2 +1,2 @@
-# react-playground
-React warm up and playground examples
+# typescript-playground
+Typescript warm up and playground examples
