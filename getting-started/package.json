@@ -1,0 +1,20 @@
+{
+  "name": "getting-started",
+  "version": "1.0.0",
+  "description": "a simple ts project to cover basics of typescript",
+  "repository": {
+    "url": "https://github.com/oussama-benmahmoud/typescript-playground"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
+  "author": "Oussama Ben Mahmoud",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.0.3",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
