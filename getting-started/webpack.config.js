@@ -1,6 +1,6 @@
 module.exports = {
   entry: './app/app.ts',
-  /*devtool: 'inline-source-map',
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -15,7 +15,7 @@ module.exports = {
   },
   output: {
     filename: 'bundle.js'
-  },*/
+  },
   devServer: {
     inline: false
   }
