@@ -1,13 +1,14 @@
-function GetAllBooks() {
+import { Category } from "./enums";
+import {Book, DamageLogger, Author, Librarian} from "./interfaces";
+import {UniversityLibrarian, ReferenceItem, Encyclopedia} from "./classes";
 
-    let books = [
+function GetAllBooks(): Book[] {
+    return  [
         {id: 1, title: 'Architecture 101', author: 'John Doe', available: true, category: Category.Biography},
         {id: 2, title: 'Just a book!', author: 'Josh Atkinson', available: true, category: Category.Fiction},
         {id: 3, title: 'DevOps Cookbook', author: 'Robert Shmidt', available: false, category: Category.Poetry},
         {id: 4, title: 'React Cookbook', author: 'Eric Shmidt', available: true, category: Category.History}
     ];
-
-    return books;
 }
 
 function LogFirstAvailable(books = GetAllBooks()): void {
@@ -24,8 +25,6 @@ function LogFirstAvailable(books = GetAllBooks()): void {
     console.log('Total Books: ' + numberOfBooks);
     console.log('First Available: ' + firstAvailable);
 }
-
-enum Category { Biography, Poetry, Fiction, History, Children};
 
 function GetBookTitlesByCategory(categoryFilter: Category = Category.Fiction): Array<string> {
     console.log('Getting books in category: ' + Category[categoryFilter]);
@@ -47,7 +46,7 @@ function LogBookTitles(titles: string[]): void {
     }
 }
 
-function GetBookById(id: number) {
+function GetBookById(id: number): Book {
     const allBooks = GetAllBooks();
     return allBooks.filter(book => book.id == id)[0];
 }
@@ -108,10 +107,54 @@ function GetTitles(bookProperty: any): string[] {
     return foundTitles;
 }
 
+function PrintBook(book: Book): void {
+    console.log(book.title + ' by ' + book.author);
+}
+
 //************************************************
 
-let checkedOutBooks = GetTitles(false);
-checkedOutBooks.forEach(value => console.log(value));
+/*let ref: ReferenceItem = new ReferenceItem('Updated Doodles 101', 2016);
+ref.printItem();
+ref.publisher = 'Packt';
+console.log(ref.publisher);*/
+
+/*let refBook: ReferenceItem = new Encyclopedia('WWII', 1999, 10);
+refBook.printCitation();*/
+
+/*let Newspaper = class extends ReferenceItem {
+    printCitation(): void {
+        console.log(`Newspaper: ${this.title}`);
+    }
+}
+
+let mypaper = new Newspaper('Journal 98', 1989);
+mypaper.printCitation();*/
+
+/*let myBook: Book = {
+    id: 5,
+    title: 'Dummy World',
+    author: 'Just Me',
+    available: true,
+    category: Category.Children,
+    pages: 252,
+    markDamaged: (reason) => {
+        console.log('Damaged: ' + reason);
+    }
+}*/
+
+// PrintBook(myBook);
+// myBook.markDamaged('torn pages');
+
+// let logDamage: DamageLogger;
+// logDamage = (damage:string) => console.log('Damage reported: '+damage);
+// logDamage('coffee strains')
+
+/*let checkedOutBooks = GetTitles(false);
+checkedOutBooks.forEach(value => console.log(value));*/
+
+/*let favoriteLibrarian: Librarian = new UniversityLibrarian();
+favoriteLibrarian.name = 'Lynda';
+favoriteLibrarian.assistCustomer('Eric');*/
 
 /*let myBooks: string[] = CheckoutBooks('David', 1);
 myBooks.forEach(title => console.log(title));*/
