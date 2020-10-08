@@ -2,6 +2,9 @@ import {Category} from "./enums";
 import {Book, Magazine} from "./interfaces";
 import {Purge} from "./lib/utilityFunctions";
 import Shelf from "./shelf";
+import * as _ from 'lodash';
+
+let snakeCaseTitle = _.snakeCase("Hello World");
 
 function GetAllBooks(): Book[] {
     return  [
