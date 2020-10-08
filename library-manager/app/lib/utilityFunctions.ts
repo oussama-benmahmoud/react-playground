@@ -13,3 +13,7 @@ export function MaxBookAllowed(age: number): number {
 function privateFunc(): void {
     console.log('this is private...');
 }
+
+export function Purge<T>(inventory: Array<T>): Array<T> {
+    return inventory.splice(2, inventory.length);
+}
