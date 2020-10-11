@@ -2,35 +2,61 @@ import {Category} from "./enums";
 import * as util from "./lib/utilityFunctions";
 
 
-interface LibMgtCallback {
-    (err: Error, titles: string[]): void;
-}
+// interface LibMgtCallback {
+//     (err: Error, titles: string[]): void;
+// }
+//
+// function getBooksByCategory(cat: Category, callback: LibMgtCallback): void {
+//     setTimeout(() => {
+//         try {
+//             let foundBooks: string[] = util.GetBookTitlesByCategory(cat)
+//             if(foundBooks.length>0) {
+//                 callback(null, foundBooks);
+//             }
+//             else {
+//                 throw new Error('no book found.');
+//             }
+//         } catch (error) {
+//             callback(error, null);
+//         }
+//     }, 2000);
+// }
+//
+// function logCategorySearch(err: Error, titles: string[]): void {
+//     if(err) {
+//         console.log(`error message: ${err.message}`);
+//     } else {
+//         console.log(`found the following titles:`);
+//         console.log(titles);
+//     }
+// }
+//
+// console.log('beginning search...');
+// getBooksByCategory(Category.Software, logCategorySearch);
+// console.log('search submitted...');
 
-function getBooksByCategory(cat: Category, callback: LibMgtCallback): void {
-    setTimeout(() => {
-        try {
-            let foundBooks: string[] = util.GetBookTitlesByCategory(cat)
+function getBooksByCategory(cat: Category): Promise<string[]> {
+    let p: Promise<string[]> = new Promise<string[]>((resolve, reject) => {
+        setTimeout(() => {
+            let foundBooks: string[] = util.GetBookTitlesByCategory(cat);
             if(foundBooks.length>0) {
-                callback(null, foundBooks);
+                resolve(foundBooks);
+            } else {
+                reject('no books found for that category');
             }
-            else {
-                throw new Error('no book found.');
-            }
-        } catch (error) {
-            callback(error, null);
-        }
-    }, 2000);
-}
+        }, 2000);
+    });
 
-function logCategorySearch(err: Error, titles: string[]): void {
-    if(err) {
-        console.log(`error message: ${err.message}`);
-    } else {
-        console.log(`found the following titles:`);
-        console.log(titles);
-    }
+    return p;
 }
 
 console.log('beginning search...');
-getBooksByCategory(Category.Software, logCategorySearch);
+getBooksByCategory(Category.Poetry)
+    .then(titles => {
+        console.log(`found titles: ${titles}`);
+        throw 'something bad happend!';
+        return titles.length;
+    }, reason => {return 0;})
+    .then(numOfBooks => console.log(`number of books: ${numOfBooks}`))
+    .catch(reason => console.log(reason));
 console.log('search submitted...');
