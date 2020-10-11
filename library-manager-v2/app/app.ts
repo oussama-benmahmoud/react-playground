@@ -1,5 +1,5 @@
-import {Category} from "./enums";
-import * as util from "./lib/utilityFunctions";
+import {Category} from './enums';
+import * as util from './lib/utilityFunctions';
 
 
 // interface LibMgtCallback {
@@ -64,7 +64,7 @@ import * as util from "./lib/utilityFunctions";
 function getBooksByCategory(cat: Category): Promise<string[]> {
     return new Promise<string[]>((resolve, reject) => {
         setTimeout(() => {
-            let foundBooks: string[] = util.GetBookTitlesByCategory(cat);
+            const foundBooks: string[] = util.GetBookTitlesByCategory(cat);
             if (foundBooks.length > 0) {
                 resolve(foundBooks);
             } else {
@@ -75,7 +75,7 @@ function getBooksByCategory(cat: Category): Promise<string[]> {
 }
 
 async function logSearchResults(bookCategory: Category) {
-    let foundBooks = await getBooksByCategory(bookCategory);
+    const foundBooks = await getBooksByCategory(bookCategory);
     console.log(foundBooks);
 }
 
