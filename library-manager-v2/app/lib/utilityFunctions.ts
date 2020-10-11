@@ -1,4 +1,4 @@
-import {Book} from "../interfaces";
+import {Book, Magazine} from "../interfaces";
 import {Category} from "../enums";
 
 export function GetAllBooks(): Book[] {
@@ -7,5 +7,13 @@ export function GetAllBooks(): Book[] {
         {id: 2, title: 'Just a book!', author: 'Josh Atkinson', available: true, category: Category.Fiction},
         {id: 3, title: 'DevOps Cookbook', author: 'Robert Shmidt', available: false, category: Category.Poetry},
         {id: 4, title: 'React Cookbook', author: 'Eric Shmidt', available: true, category: Category.History}
+    ];
+}
+
+export function GetAllMagazines(): Magazine[] {
+    return  [
+        {title: 'Mag 1', publisher: 'OReilly'},
+        {title: 'Mag 2', publisher: 'OReilly'},
+        {title: 'Mag 3', publisher: '1OF1'},
     ];
 }

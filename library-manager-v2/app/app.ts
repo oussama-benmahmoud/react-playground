@@ -1,6 +1,6 @@
 import {Category} from "./enums";
-import {Book, Logger, Author, Librarian, Magazine} from "./interfaces";
-import {UniversityLibrarian, ReferenceItem} from "./classes";
+import {Book, Magazine} from "./interfaces";
+import {Employee, Researcher, UniversityLibrarian} from "./classes";
 import * as util from "./lib/utilityFunctions";
 
 /*function PrintBookInfo({title, author}: Book): void {
@@ -45,3 +45,47 @@ interface KeyValuePair<K, V> extends Array<K|V> {
 
 let catalogLocation: KeyValuePair<string, Book> = ['A 182.25.5', book1];
 catalogLocation[2] = 'hey';
+
+let allBooks: Book[] = util.GetAllBooks();
+let allMagazines: Magazine[] = util.GetAllMagazines();
+
+let readingMaterial: PrintMaterial = allBooks[0];
+
+function PrintTitle(item: PrintMaterial): void {
+    console.log(item.title);
+}
+
+// PrintTitle(allBooks[0]);
+// PrintTitle(allMagazines[0]);
+
+let serialNovel: Serial = {
+    id: 10,
+    title: 'Hello World',
+    author: 'Magnus',
+    available: true,
+    category: Category.Biography,
+    publisher: 'AHT'
+}
+
+function applyMixins(derivedCtor: any, baseCtors: any[]) {
+    baseCtors.forEach(baseCtor => {
+        Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
+            derivedCtor.prototype[name] = baseCtor.prototype[name];
+        });
+    });
+}
+
+applyMixins(UniversityLibrarian, [Employee, Researcher]);
+
+let newLibrarian = new UniversityLibrarian();
+//newLibrarian.doResearch('Eco');
+
+// let frequency: 'monthly' | 'annually' = 'monthly';
+type Frequency = 'monthly' | 'annually';
+
+function GetMagazineByFrequency(preferredFrequency: Frequency) {
+    //
+}
+
+type PrintMaterial = Book | Magazine;
+type Serial = Book & Magazine;
