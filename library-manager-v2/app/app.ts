@@ -1,7 +1,8 @@
 import {Category} from "./enums";
-import {Book, Magazine} from "./interfaces";
-import {Employee, Researcher, UniversityLibrarian} from "./classes";
+import {Book, Librarian, Magazine} from "./interfaces";
+import {Employee, Researcher, UniversityLibrarian, PublicLibrarian} from "./classes";
 import * as util from "./lib/utilityFunctions";
+import './LibrarianExtension';
 
 class LibraryBook {
     Checkout(): this {
@@ -36,6 +37,7 @@ class ElectronicBook extends LibraryBook {
     }
 }
 
+/*
 let kidBook = new ChildrenBook();
 kidBook.Checkin()
     .Clean()
@@ -44,4 +46,43 @@ kidBook.Checkin()
 let ebook = new ElectronicBook();
 ebook.Checkin()
     .RemoveFromCustomerDevice()
-    .Checkout();
+    .Checkout();*/
+
+// let mergedBook: Book;
+// mergedBook.publisher = 'Programming press';
+
+// let newLibrarian = new UniversityLibrarian();
+// newLibrarian.phone = '065416156';
+// newLibrarian.hostSeminar('Test Sem');
+
+function logVisitor(param: number | string) {
+    if (typeof param === 'number') {
+        console.log(`${param} new visitors arrived.`);
+    }
+    else {
+        console.log(`${param.toUpperCase()} visited.`);
+    }
+}
+
+// logVisitor(5);
+// logVisitor("hey");
+
+// let lib: Librarian = new PublicLibrarian();
+// if (lib instanceof UniversityLibrarian) {
+//     lib.assistFaculty();
+// }
+// if (lib instanceof PublicLibrarian) {
+//     lib.teachCommunity();
+// }
+
+function isBook(text: Book | Magazine): text is Book {
+    return (<Book>text).author !== undefined;
+}
+
+let readingMaterial: Book | Magazine = util.GetAllBooks()[0];
+
+if (isBook(readingMaterial)) {
+    console.log(`the book's author is ${readingMaterial.author}.`);
+} else {
+    console.log(`the magazine's publisher is ${readingMaterial.publisher}.`);
+}
