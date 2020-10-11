@@ -17,3 +17,17 @@ export function GetAllMagazines(): Magazine[] {
         {title: 'Mag 3', publisher: '1OF1'},
     ];
 }
+
+export function GetBookTitlesByCategory(categoryFilter: Category = Category.Fiction): Array<string> {
+    console.log('Getting books in category: ' + Category[categoryFilter]);
+    const allBooks = GetAllBooks();
+    const filteredTitle: string[] = [];
+
+    for (let currentBook of allBooks) {
+        if(currentBook.category === categoryFilter) {
+            filteredTitle.push(currentBook.title);
+        }
+    }
+
+    return filteredTitle;
+}

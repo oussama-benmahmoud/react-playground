@@ -1,17 +1,36 @@
 import {Category} from "./enums";
-import {Book, Librarian, Magazine} from "./interfaces";
-import {Employee, Researcher, UniversityLibrarian, PublicLibrarian} from "./classes";
 import * as util from "./lib/utilityFunctions";
 
-let lib1 = new UniversityLibrarian();
-let lib2 = new PublicLibrarian();
 
-try {
-    lib1.assistFaculty = () => console.log('assistFaculty replacement method');
-    lib2.teachCommunity = () => console.log('teachCommunity replacement method');
-} catch (error) {
-    console.log(error);
+interface LibMgtCallback {
+    (err: Error, titles: string[]): void;
 }
 
-lib1.assistFaculty();
-lib2.teachCommunity();
+function getBooksByCategory(cat: Category, callback: LibMgtCallback): void {
+    setTimeout(() => {
+        try {
+            let foundBooks: string[] = util.GetBookTitlesByCategory(cat)
+            if(foundBooks.length>0) {
+                callback(null, foundBooks);
+            }
+            else {
+                throw new Error('no book found.');
+            }
+        } catch (error) {
+            callback(error, null);
+        }
+    }, 2000);
+}
+
+function logCategorySearch(err: Error, titles: string[]): void {
+    if(err) {
+        console.log(`error message: ${err.message}`);
+    } else {
+        console.log(`found the following titles:`);
+        console.log(titles);
+    }
+}
+
+console.log('beginning search...');
+getBooksByCategory(Category.Software, logCategorySearch);
+console.log('search submitted...');
