@@ -35,28 +35,51 @@ import * as util from "./lib/utilityFunctions";
 // getBooksByCategory(Category.Software, logCategorySearch);
 // console.log('search submitted...');
 
+// function getBooksByCategory(cat: Category): Promise<string[]> {
+//     let p: Promise<string[]> = new Promise<string[]>((resolve, reject) => {
+//         setTimeout(() => {
+//             let foundBooks: string[] = util.GetBookTitlesByCategory(cat);
+//             if(foundBooks.length>0) {
+//                 resolve(foundBooks);
+//             } else {
+//                 reject('no books found for that category');
+//             }
+//         }, 2000);
+//     });
+//
+//     return p;
+// }
+//
+// console.log('beginning search...');
+// getBooksByCategory(Category.Poetry)
+//     .then(titles => {
+//         console.log(`found titles: ${titles}`);
+//         throw 'something bad happend!';
+//         return titles.length;
+//     }, reason => {return 0;})
+//     .then(numOfBooks => console.log(`number of books: ${numOfBooks}`))
+//     .catch(reason => console.log(reason));
+// console.log('search submitted...');
+
 function getBooksByCategory(cat: Category): Promise<string[]> {
-    let p: Promise<string[]> = new Promise<string[]>((resolve, reject) => {
+    return new Promise<string[]>((resolve, reject) => {
         setTimeout(() => {
             let foundBooks: string[] = util.GetBookTitlesByCategory(cat);
-            if(foundBooks.length>0) {
+            if (foundBooks.length > 0) {
                 resolve(foundBooks);
             } else {
                 reject('no books found for that category');
             }
         }, 2000);
     });
+}
 
-    return p;
+async function logSearchResults(bookCategory: Category) {
+    let foundBooks = await getBooksByCategory(bookCategory);
+    console.log(foundBooks);
 }
 
 console.log('beginning search...');
-getBooksByCategory(Category.Poetry)
-    .then(titles => {
-        console.log(`found titles: ${titles}`);
-        throw 'something bad happend!';
-        return titles.length;
-    }, reason => {return 0;})
-    .then(numOfBooks => console.log(`number of books: ${numOfBooks}`))
+logSearchResults(Category.Poetry)
     .catch(reason => console.log(reason));
 console.log('search submitted...');
