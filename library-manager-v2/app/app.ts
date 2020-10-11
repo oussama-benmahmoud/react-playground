@@ -1,6 +1,6 @@
 import {Category} from "./enums";
 import {Book, Librarian, Magazine} from "./interfaces";
-import {Employee, Researcher, UniversityLibrarian, PublicLibrarian} from "./classes";
+import {CLASS_INFO, Employee, Researcher, UniversityLibrarian, PublicLibrarian} from "./classes";
 import * as util from "./lib/utilityFunctions";
 import './LibrarianExtension';
 
@@ -55,14 +55,14 @@ ebook.Checkin()
 // newLibrarian.phone = '065416156';
 // newLibrarian.hostSeminar('Test Sem');
 
-function logVisitor(param: number | string) {
-    if (typeof param === 'number') {
-        console.log(`${param} new visitors arrived.`);
-    }
-    else {
-        console.log(`${param.toUpperCase()} visited.`);
-    }
-}
+// function logVisitor(param: number | string) {
+//     if (typeof param === 'number') {
+//         console.log(`${param} new visitors arrived.`);
+//     }
+//     else {
+//         console.log(`${param.toUpperCase()} visited.`);
+//     }
+// }
 
 // logVisitor(5);
 // logVisitor("hey");
@@ -75,14 +75,42 @@ function logVisitor(param: number | string) {
 //     lib.teachCommunity();
 // }
 
-function isBook(text: Book | Magazine): text is Book {
-    return (<Book>text).author !== undefined;
+// function isBook(text: Book | Magazine): text is Book {
+//     return (<Book>text).author !== undefined;
+// }
+//
+// let readingMaterial: Book | Magazine = util.GetAllBooks()[0];
+//
+// if (isBook(readingMaterial)) {
+//     console.log(`the book's author is ${readingMaterial.author}.`);
+// } else {
+//     console.log(`the magazine's publisher is ${readingMaterial.publisher}.`);
+// }
+
+let mySymbol = Symbol('first_symbol');
+let anotherSymbol = Symbol('first_symbol');
+
+// console.log(mySymbol === anotherSymbol);
+// console.log(typeof mySymbol);
+
+let myObject = {
+    [mySymbol]: 'value for this symbol'
 }
 
-let readingMaterial: Book | Magazine = util.GetAllBooks()[0];
+// @ts-ignore
+//console.log(myObject[mySymbol]);
 
-if (isBook(readingMaterial)) {
-    console.log(`the book's author is ${readingMaterial.author}.`);
-} else {
-    console.log(`the magazine's publisher is ${readingMaterial.publisher}.`);
+let librarian = new UniversityLibrarian();
+// librarian[CLASS_INFO]();
+
+let libraryCustomer = {
+    name: 'Dave',
+    assistCustomer: (custName: string) => console.log(`assisting ${custName}`)
+}
+
+if (libraryCustomer instanceof UniversityLibrarian) {
+    console.log('a helpful librarian');
+}
+else {
+    console.log('not a librarian');
 }

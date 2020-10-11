@@ -18,10 +18,20 @@ class Researcher {
     }
 }
 
+export const CLASS_INFO = Symbol();
+
 class UniversityLibrarian implements Interfaces.Librarian, Employee, Researcher {
     name: string;
     email: string;
     department: string;
+
+    [CLASS_INFO](): void {
+        console.log('this class represents a UniversityLibrarian.');
+    }
+
+    static [Symbol.hasInstance](obj: Object) {
+        return obj.hasOwnProperty('name') && obj.hasOwnProperty('assistCustomer');
+    }
 
     assistCustomer(custName: string) {
         console.log(this.name + ' is assisting ' + custName);
